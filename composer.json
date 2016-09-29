@@ -1,0 +1,25 @@
+{
+    "require": {
+        "php": ">=7.0.10"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "squizlabs/php_codesniffer": "^2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "ConfHub\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ConfHub\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": [
+            "php vendor/bin/phpcs",
+            "php vendor/bin/phpunit"
+        ]
+    }
+}
