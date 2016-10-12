@@ -1,0 +1,10 @@
+# Docker files
+.dockerignore
+docker-compose.yml
+Dockerfile
+
+# Git files
+.git
+
+# Composer files
+vendor
