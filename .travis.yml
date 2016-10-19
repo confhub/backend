@@ -13,7 +13,7 @@ script:
   - php vendor/bin/phpunit
 
 after_success:
-  - "curl -H \"Content-Type: application/json\" --data '{\"build\": true}' -X POST https://registry.hub.docker.com/u/confhub/backend/trigger/bd32b8db-f1a1-4616-a788-6f97ad1a6df1/"
+  - "curl -H \"Content-Type: application/json\" --data '{\"build\": true}' -X POST ${DOCKER_HUB_TRIGGER}"
 
 cache:
   directories:
