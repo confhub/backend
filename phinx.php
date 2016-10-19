@@ -1,5 +1,8 @@
 <?php
 
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 return [
     'paths' => [
         'migrations' => '%%PHINX_CONFIG_DIR%%/database/migrations',
@@ -9,12 +12,12 @@ return [
         'default_migration_table' => 'migrations',
         'default_database' => 'production',
         'production' => [
-            'adapter' => 'mysql',
-            'host' => '127.0.0.1',
-            'name' => 'default',
-            'user' => 'root',
-            'pass' => 'password',
-            'port' => '3306',
+            'adapter' => getenv('DB_ADAPTER'),
+            'host' => getenv('DB_HOST'),
+            'port' => getenv('DB_PORT'),
+            'name' => getenv('DB_NAME'),
+            'user' => getenv('DB_USER'),
+            'pass' => getenv('DB_PASS'),
             'charset' => 'utf8',
         ],
     ],

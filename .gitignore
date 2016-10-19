@@ -32,3 +32,5 @@ nbproject/*
 /vendor/
 composer.phar
 
+# .env files
+.env
