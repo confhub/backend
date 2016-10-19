@@ -3,11 +3,23 @@ declare(strict_types=1);
 
 namespace ConfHub;
 
+use \Illuminate\Database\Eloquent\Model;
+
 /**
- * Conf class
+ * Confs ORM class
  */
-class Conf
+class Confs extends Model
 {
+    /**
+     * @var string
+     */
+    protected $table = 'confs';
+
+    /**
+     * @var bool
+     */
+    public $timestamps = false;
+
     /**
      * @var string Conf title
      */

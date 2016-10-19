@@ -5,16 +5,16 @@ namespace ConfHub;
 
 use PHPUnit_Framework_TestCase as TestCase;
 
-class ConfTest extends TestCase
+class ConfsTest extends TestCase
 {
     /**
-     * @var Conf
+     * @var Confs
      */
     protected $target;
 
     public function setUp()
     {
-        $this->target = new Conf();
+        $this->target = new Confs();
     }
 
     public function tearDown()

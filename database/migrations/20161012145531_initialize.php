@@ -10,7 +10,7 @@ class Initialize extends AbstractMigration
         $table->addColumn('slug', 'string')
               ->addColumn('title', 'string')
               ->addColumn('subject', 'string')
-              ->addColumn('date', 'datetime')
+              ->addColumn('date', 'date')
               ->addColumn('location', 'string')
               ->addColumn('url', 'string')
               ->addColumn('hash', 'string')
