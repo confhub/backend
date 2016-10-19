@@ -35,27 +35,63 @@ $capsule->addConnection($setting['settings']['db']);
 $capsule->setAsGlobal();
 $capsule->bootEloquent();
 
+/**
+ * @SWG\Swagger(
+ *     basePath="/v1",
+ *     schemes={"http"},
+ *     @SWG\Info(
+ *         version="1.0",
+ *         title="ConfHub API",
+ *     )
+ * )
+ */
 $app = new Slim\App($container);
 
-$app->get('/conf', function (Request $request, Response $response) {
-    $conf = Confs::all();
-    $json = $conf->toJson();
+$app->group('/v1', function () {
 
-    // Setting header
-    $response = $response->withHeader('Content-type', 'application/json');
+    /**
+     * @SWG\Get(
+     *     path="/conf",
+     *     @SWG\Response(response="200", description="Get Response")
+     * )
+     */
+    $this->get('/conf', function (Request $request, Response $response) {
+        $conf = Confs::all();
+        $json = $conf->toJson();
 
-    // Setting body
-    $body = $response->getBody();
-    $body->write($json);
+        // Setting header
+        $response = $response->withHeader('Content-type', 'application/json');
 
-    return $response;
-});
+        // Setting body
+        $body = $response->getBody();
+        $body->write($json);
 
-$app->get('/', function (Request $request, Response $response) {
-    $body = $response->getBody();
-    $body->write('Hello World');
+        return $response;
+    });
 
-    return $response;
+    /**
+     * @SWG\Get(
+     *     path="/api",
+     *     @SWG\Response(response="200", description="Swagger JSON")
+     * )
+     */
+    $this->get('/api', function(Request $request, Response $response) {
+        // Use zircote/swagger-php function
+        $swagger = \Swagger\scan(__DIR__, [
+            'exclude' => [
+                'vendor',
+            ],
+        ]);
+
+        // Setting header
+        $response = $response->withHeader('Content-type', 'application/json');
+
+        // Setting body
+        $body = $response->getBody();
+        $body->write((string) $swagger);
+
+        return $response;
+    });
 });
 
 return $app;

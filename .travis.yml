@@ -11,6 +11,7 @@ install:
 script:
   - php vendor/bin/phpcs
   - php vendor/bin/phpunit
+  - php vendor/bin/swagger --stdout --exclude vendor
 
 after_success:
   - "curl -H \"Content-Type: application/json\" --data '{\"build\": true}' -X POST ${DOCKER_HUB_TRIGGER}"
