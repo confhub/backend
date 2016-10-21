@@ -1,28 +1,30 @@
 <?php
-declare(strict_types=1);
 
 namespace ConfHub;
 
-use PHPUnit_Framework_TestCase as TestCase;
-
-class ConfsTest extends TestCase
+class ConfsTest extends \Codeception\Test\Unit
 {
+    /**
+     * @var \UnitTester
+     */
+    protected $tester;
+
     /**
      * @var Confs
      */
     protected $target;
 
-    public function setUp()
+    protected function _before()
     {
         $this->target = new Confs();
     }
 
-    public function tearDown()
+    protected function _after()
     {
         $this->target = null;
     }
 
-    public function testSayHelloWhenNameIsMilesWillReturnHelloMiles()
+    public function testTitle()
     {
         // Arrange
         $title = 'PHPConf 2016';

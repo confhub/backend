@@ -13,5 +13,4 @@
 
     <!-- Paths and file to check -->
     <file>src</file>
-    <file>tests</file>
 </ruleset>

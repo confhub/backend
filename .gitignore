@@ -34,3 +34,5 @@ composer.phar
 
 # .env files
 .env
+
+tests/_output/*
