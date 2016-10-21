@@ -24,7 +24,7 @@ $setting = [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
         ],
-    ]
+    ],
 ];
 
 $container = new Slim\Container($setting);
@@ -65,6 +65,75 @@ $app->group('/v1', function () {
         // Setting body
         $body = $response->getBody();
         $body->write($json);
+
+        return $response;
+    });
+
+    /**
+     * @SWG\Get(
+     *     path="/conf/{slug}",
+     *     @SWG\Response(response="200", description="Get Response")
+     * )
+     */
+    $this->get('/conf/{slug}', function (Request $request, Response $response) {
+        $slug = $request->getAttribute('slug');
+        $conf = Confs::where('slug', $slug);
+        $json = $conf->toJson();
+
+        // Setting header
+        $response = $response->withHeader('Content-type', 'application/json');
+
+        // Setting body
+        $body = $response->getBody();
+        $body->write($json);
+
+        return $response;
+    });
+
+    /**
+     * @SWG\Get(
+     *     path="/conf/{slug}/hash",
+     *     @SWG\Response(response="200", description="Get Response")
+     * )
+     */
+    $this->get('/conf/{slug}/hash', function (Request $request, Response $response) {
+        $slug = $request->getAttribute('slug');
+        $conf = Confs::where('slug', $slug);
+        $json = json_encode($conf->hash);
+
+        // Setting header
+        $response = $response->withHeader('Content-type', 'application/json');
+
+        // Setting body
+        $body = $response->getBody();
+        $body->write($json);
+
+        return $response;
+    });
+
+    /**
+     * @SWG\Post(
+     *     path="/conf/{slug}",
+     *     @SWG\Response(response="200", description="Get Response")
+     * )
+     */
+    $this->post('/conf/{slug}', function (Request $request, Response $response) {
+        $slug = $request->getAttribute('slug');
+        $body = $request->getParsedBody();
+
+        $conf = new Confs();
+        $conf->slug = $slug;
+        $conf->title = $body['title'];
+        $conf->subject = $body['subject'];
+        $conf->date = $body['date'];
+        $conf->location = $body['location'];
+        $conf->url = $body['url'];
+        $conf->hash = $body['hash'];
+
+        $conf->save();
+
+        // Setting header
+        $response = $response->withHeader('Content-type', 'application/json');
 
         return $response;
     });
